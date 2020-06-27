@@ -20,9 +20,24 @@ jobs:
           key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}
           restore-keys: |
             ${{ runner.os }}-node-
+      - name: docker login
+        env: 
+          DOC_U: ${{secrets.DOC_U}}
+          DOC_P: ${{secrets.DOC_P}}
+        run: |
+          docker login -u $DOC_U $DOC_P        
 
       - name: Node ${{ matrix.node-version }}
         uses: actions/setup-node@v1
         with:
           node-version: ${{ matrix.node-version }}
+      
+      - name: Build the tagged Docker image
+          run: docker build . --file Dockerfile --tag sunilkdas/angular-cli:$
+      - name: Push the tagged Docker image
+          run: docker push sunilkdas/angular-cli:$
+      - name: Build the latest Docker image
+          run: docker build . --file Dockerfile --tag sunilkdas/angular-cli:latest
+      - name: Push the latest Docker image
+          run: docker push sunilkdas/angular-cli:latest
    

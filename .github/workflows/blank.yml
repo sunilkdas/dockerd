@@ -19,14 +19,15 @@ jobs:
           key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}
           restore-keys: |
             ${{ runner.os }}-node-
-      - name: docker login
-        run: |
-          echo ${{ secrets.DOC_P }} | docker login -u ${{ secrets.DOC_U }} --password-stdin        
+           
 
       - name: Node ${{ matrix.node-version }}
         uses: actions/setup-node@v1
         with:
           node-version: ${{ matrix.node-version }}
+      - name: docker login
+        run: |
+          echo ${{ secrets.DOC_P }} | docker login -u ${{ secrets.DOC_U }} --password-stdin   
       - name: Get the version
         id: vars
         run: echo ::set-output name=tag::$(echo ${GITHUB_REF:10})

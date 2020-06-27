@@ -32,10 +32,10 @@ jobs:
         id: vars
         run: echo ::set-output name=tag::$(echo ${GITHUB_REF:10})
       - name: Build the tagged Docker image
-        run: docker build . --file Dockerfile --tag sunilkdas/angular-cli:v1
+        run: docker build . --file Dockerfile --tag colorlessknight/testrepo:v1  
       - name: Login
         run: echo ${{ secrets.DOC_P }} | docker login -u ${{ secrets.DOC_U }} --password-stdin
       - name: Push the tagged Docker image  
-        run: docker push sunilkdas/angular-cli:v1
+        run: docker push colorlessknight/testrepo:v1
    
    

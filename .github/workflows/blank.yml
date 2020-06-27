@@ -1,7 +1,7 @@
 name: Build an angular project 
 on:
     release:
-        types: [published]
+        types: [push]
 
 jobs:
   build:

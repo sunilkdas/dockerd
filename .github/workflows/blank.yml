@@ -21,11 +21,8 @@ jobs:
           restore-keys: |
             ${{ runner.os }}-node-
       - name: docker login
-        env: 
-          DOC_U: ${{secrets.DOC_U}}
-          DOC_P: ${{secrets.DOC_P}}
         run: |
-          docker login -u $DOC_U $DOC_P        
+          echo ${{ secrets.DOC_P }} | docker login -u ${{ secrets.DOC_U }} --password-stdin        
 
       - name: Node ${{ matrix.node-version }}
         uses: actions/setup-node@v1

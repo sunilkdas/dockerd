@@ -36,8 +36,8 @@ jobs:
         run: docker build . --file Dockerfile --tag sunilkdas/angular-cli:latest
       - name: Push the tagged Docker image
         run: docker push sunilkdas/angular-cli:$
-      - name: Build the latest Docker image
-        run: docker build . --file Dockerfile --tag sunilkdas/angular-cli:latest
-      - name: Push the latest Docker image
-        run: docker push sunilkdas/angular-cli:latest
+      #- name: Build the latest Docker image
+        #run: docker build . --file Dockerfile --tag sunilkdas/angular-cli:latest
+      #- name: Push the latest Docker image
+        #run: docker push sunilkdas/angular-cli:latest
    

@@ -26,18 +26,14 @@ jobs:
           DOC_P: ${{secrets.DOC_P}}
         run: |
           docker login -u $DOC_U $DOC_P        
-
-      - name: Node ${{ matrix.node-version }}
-        uses: actions/setup-node@v1
-        with:
-          node-version: ${{ matrix.node-version }}
-      
+      - name: Get the version
+        id: vars
+        run: echo ::set-output name=tag::$(echo ${GITHUB_REF:10})
       - name: Build the tagged Docker image
-          run: docker build . --file Dockerfile --tag sunilkdas/angular-cli:$
+        run: docker build . --file Dockerfile --tag pjlamb12/angular-cli:${{steps.vars.outputs.tag}}
       - name: Push the tagged Docker image
-          run: docker push sunilkdas/angular-cli:$
+        run: docker push pjlamb12/angular-cli:${{steps.vars.outputs.tag}}
       - name: Build the latest Docker image
-          run: docker build . --file Dockerfile --tag sunilkdas/angular-cli:latest
+        run: docker build . --file Dockerfile --tag pjlamb12/angular-cli:latest
       - name: Push the latest Docker image
-          run: docker push sunilkdas/angular-cli:latest
-   
+        run: docker push pjlamb12/angular-cli:latest

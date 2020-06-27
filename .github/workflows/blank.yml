@@ -1,8 +1,8 @@
 name: Build an angular project 
 on:
-    release:
-        types: [push]
-
+  push:
+    branches:
+      - master
 jobs:
   build:
     runs-on: ubuntu-latest
